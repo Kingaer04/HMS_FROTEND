@@ -1,42 +1,38 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
-import { ROLE_ROUTES, Role } from "@/types/auth.types";
 
-const PROTECTED_PREFIXES = ["/admin", "/doctor", "/receptionist", "/patient", "/lab"];
-const AUTH_PREFIX = "/login";
+const PROTECTED = ["/admin", "/doctor", "/receptionist", "/patient", "/lab"];
+const AUTH_PATHS = ["/login", "/register"];
+
+const ROLE_ROUTES: Record<string, string> = {
+  HospitalAdmin:  "/admin",
+  Doctor:         "/doctor",
+  Receptionist:   "/receptionist",
+  Patient:        "/patient",
+  LabTechnician:  "/lab",
+};
 
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
+  const token = request.cookies.get("hms-token")?.value;
+  const role  = request.cookies.get("hms-role")?.value;
 
-  // Read auth from cookie (set by client after login)
-  const authCookie = request.cookies.get("hms-token")?.value;
-  const roleCookie = request.cookies.get("hms-role")?.value as Role | undefined;
+  const isProtected = PROTECTED.some((p) => pathname.startsWith(p));
+  const isAuthPath  = AUTH_PATHS.some((p) => pathname.startsWith(p));
 
-  const isProtected = PROTECTED_PREFIXES.some((p) => pathname.startsWith(p));
-  const isAuth = pathname.startsWith(AUTH_PREFIX) || pathname.startsWith("/register");
-
-  // Unauthenticated visiting protected route
-  if (isProtected && !authCookie) {
-    return NextResponse.redirect(new URL("/login/hospital", request.url));
-  }
-
-  // Authenticated visiting login/register
-  if (isAuth && authCookie && roleCookie) {
-    const route = ROLE_ROUTES[roleCookie] || "/admin";
-    return NextResponse.redirect(new URL(route, request.url));
-  }
-
-  // Root redirect
   if (pathname === "/") {
-    if (authCookie && roleCookie) {
-      return NextResponse.redirect(new URL(ROLE_ROUTES[roleCookie] || "/admin", request.url));
-    }
+    if (token && role) return NextResponse.redirect(new URL(ROLE_ROUTES[role] ?? "/admin", request.url));
     return NextResponse.redirect(new URL("/login/hospital", request.url));
   }
-
+  if (isProtected && !token) {
+    return NextResponse.redirect(new URL("/login/hospital", request.url));
+  }
+  if (isAuthPath && token && role) {
+    return NextResponse.redirect(new URL(ROLE_ROUTES[role] ?? "/admin", request.url));
+  }
   return NextResponse.next();
 }
 
 export const config = {
-  matcher: ["/((?!_next/static|_next/image|favicon.ico|api).*)"],
+  matcher: ["/((?!_next/static|_next/image|favicon.ico).*)"],
 };

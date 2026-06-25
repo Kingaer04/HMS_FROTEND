@@ -1,19 +1,25 @@
 import { notFound } from "next/navigation";
+import HospitalRegisterForm from "@/components/auth/forms/HospitalRegisterForm";
+import DoctorRegisterForm from "@/components/auth/forms/DoctorRegisterForm";
+import ReceptionistRegisterForm from "@/components/auth/forms/ReceptionistRegisterForm";
+import PatientRegisterForm from "@/components/auth/forms/PatientRegisterForm";
+import LabRegisterForm from "@/components/auth/forms/LabRegisterForm";
 
-const VALID_ROLES = ["hospital", "doctor", "receptionist", "patient", "lab-technician"];
+const VALID_ROLES = ["hospital", "doctor", "receptionist", "patient", "lab-technician"] as const;
+type RoleSlug = typeof VALID_ROLES[number];
+
+const FORM_MAP: Record<RoleSlug, React.ComponentType> = {
+  "hospital":        HospitalRegisterForm,
+  "doctor":          DoctorRegisterForm,
+  "receptionist":    ReceptionistRegisterForm,
+  "patient":         PatientRegisterForm,
+  "lab-technician":  LabRegisterForm,
+};
 
 export default function RegisterPage({ params }: { params: { role: string } }) {
-  if (!VALID_ROLES.includes(params.role)) notFound();
-
-  return (
-    <div className="w-full max-w-md">
-      <div className="bg-white rounded-2xl shadow-xl p-8 border border-gray-100">
-        <h1 className="text-2xl font-bold text-center">Register</h1>
-        <p className="text-center text-gray-500 mt-1 capitalize">{params.role.replace("-", " ")}</p>
-        <p className="text-xs text-center text-amber-600 mt-3">Sprint 02–06: Registration form implemented here</p>
-      </div>
-    </div>
-  );
+  if (!VALID_ROLES.includes(params.role as RoleSlug)) notFound();
+  const Form = FORM_MAP[params.role as RoleSlug];
+  return <Form />;
 }
 
 export function generateStaticParams() {

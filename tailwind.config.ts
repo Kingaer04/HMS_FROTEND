@@ -1,7 +1,5 @@
 import type { Config } from "tailwindcss";
-
 const config: Config = {
-  darkMode: "media",
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -11,105 +9,28 @@ const config: Config = {
     extend: {
       fontFamily: {
         sans: ["DM Sans", "system-ui", "sans-serif"],
-        mono: ["DM Mono", "Fira Code", "monospace"],
-      },
-      colors: {
-        // Map CSS vars → Tailwind classes
-        primary: {
-          DEFAULT: "var(--color-primary)",
-          hover:   "var(--color-primary-hover)",
-          light:   "var(--color-primary-light)",
-          50:  "var(--hms-navy-50)",
-          100: "var(--hms-navy-100)",
-          200: "var(--hms-navy-200)",
-          300: "var(--hms-navy-300)",
-          400: "var(--hms-navy-400)",
-          500: "var(--hms-navy-500)",
-          600: "var(--hms-navy-600)",
-          700: "var(--hms-navy-700)",
-          800: "var(--hms-navy-800)",
-          900: "var(--hms-navy-900)",
-          950: "var(--hms-navy-950)",
-        },
-        teal: {
-          DEFAULT: "var(--hms-teal-500)",
-          50:  "var(--hms-teal-50)",
-          100: "var(--hms-teal-100)",
-          200: "var(--hms-teal-200)",
-          300: "var(--hms-teal-300)",
-          400: "var(--hms-teal-400)",
-          500: "var(--hms-teal-500)",
-          600: "var(--hms-teal-600)",
-          700: "var(--hms-teal-700)",
-          800: "var(--hms-teal-800)",
-          900: "var(--hms-teal-900)",
-        },
-        accent: {
-          DEFAULT: "var(--color-accent)",
-          hover:   "var(--color-accent-hover)",
-          light:   "var(--color-accent-light)",
-          50:  "var(--hms-amber-50)",
-          100: "var(--hms-amber-100)",
-          200: "var(--hms-amber-200)",
-          300: "var(--hms-amber-300)",
-          400: "var(--hms-amber-400)",
-          500: "var(--hms-amber-500)",
-          600: "var(--hms-amber-600)",
-        },
-        surface: {
-          DEFAULT: "var(--color-surface)",
-          raised:  "var(--color-surface-raised)",
-          bg:      "var(--color-bg)",
-        },
-        border: {
-          DEFAULT: "var(--color-border)",
-          strong:  "var(--color-border-strong)",
-        },
-        text: {
-          primary:   "var(--color-text-primary)",
-          secondary: "var(--color-text-secondary)",
-          muted:     "var(--color-text-muted)",
-          disabled:  "var(--color-text-disabled)",
-        },
-      },
-      borderRadius: {
-        sm:   "var(--radius-sm)",
-        md:   "var(--radius-md)",
-        lg:   "var(--radius-lg)",
-        xl:   "var(--radius-xl)",
-        "2xl":"20px",
-        "3xl":"28px",
-        full: "9999px",
-      },
-      boxShadow: {
-        sm:  "var(--shadow-sm)",
-        md:  "var(--shadow-md)",
-        lg:  "var(--shadow-lg)",
-        xl:  "var(--shadow-xl)",
-        "glow-primary": "var(--shadow-glow-primary)",
-        "glow-teal":    "var(--shadow-glow-teal)",
-      },
-      transitionTimingFunction: {
-        spring: "cubic-bezier(0.34, 1.56, 0.64, 1)",
-        smooth: "cubic-bezier(0.4, 0, 0.2, 1)",
-      },
-      keyframes: {
-        fadeIn: {
-          from: { opacity: "0", transform: "translateY(6px)" },
-          to:   { opacity: "1", transform: "translateY(0)" },
-        },
-        shimmer: {
-          from: { backgroundPosition: "-200% 0" },
-          to:   { backgroundPosition: "200% 0" },
-        },
+        mono: ["DM Mono", "monospace"],
       },
       animation: {
-        "fade-in": "fadeIn 0.3s ease both",
-        shimmer:   "shimmer 1.5s infinite",
+        "fade-up":     "fadeUp 0.4s cubic-bezier(0.22,1,0.36,1) both",
+        "fade-in":     "fadeIn 0.3s ease both",
+        "slide-right": "slideRight 0.35s cubic-bezier(0.22,1,0.36,1) both",
+        "pop":         "scalePop 0.35s cubic-bezier(0.34,1.56,0.64,1) both",
+        "float":       "floatUp 4s ease-in-out infinite",
+        "pulse-soft":  "pulse-soft 2s ease-in-out infinite",
+        "spin":        "spin 1s linear infinite",
+      },
+      keyframes: {
+        fadeUp:    { from: { opacity: "0", transform: "translateY(10px)" }, to: { opacity: "1", transform: "translateY(0)" } },
+        fadeIn:    { from: { opacity: "0" }, to: { opacity: "1" } },
+        slideRight:{ from: { opacity: "0", transform: "translateX(-12px)" }, to: { opacity: "1", transform: "translateX(0)" } },
+        scalePop:  { "0%": { transform: "scale(0.92)", opacity: "0" }, "60%": { transform: "scale(1.02)" }, "100%": { transform: "scale(1)", opacity: "1" } },
+        floatUp:   { "0%, 100%": { transform: "translateY(0px)" }, "50%": { transform: "translateY(-6px)" } },
+        "pulse-soft": { "0%, 100%": { opacity: "1" }, "50%": { opacity: "0.5" } },
+        spin:      { to: { transform: "rotate(360deg)" } },
       },
     },
   },
   plugins: [],
 };
-
 export default config;

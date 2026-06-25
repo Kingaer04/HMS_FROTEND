@@ -1,203 +1,157 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=DM+Mono:wght@400;500&display=swap');
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-/* ============================================================
-   HMS DESIGN SYSTEM — CSS Custom Properties
-   Aesthetic: Clinical Precision meets Warm Authority
-   Fonts: DM Sans (UI) + DM Mono (data/code)
-   Palette: Deep Navy + Warm Teal + Soft Amber accent
-   ============================================================ */
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=DM+Mono:wght@400;500&display=swap');
 
 :root {
-  /* ── Brand Colors ── */
-  --hms-navy-950: #0A1628;
-  --hms-navy-900: #0F2044;
-  --hms-navy-800: #162D5E;
-  --hms-navy-700: #1E3A7A;
-  --hms-navy-600: #2647A0;
-  --hms-navy-500: #3258C4;
-  --hms-navy-400: #5577D4;
-  --hms-navy-300: #849AE3;
-  --hms-navy-200: #B8C5F0;
-  --hms-navy-100: #DDE4F8;
-  --hms-navy-50:  #F0F3FD;
+  --navy-950: #060D1A;
+  --navy-900: #0A1628;
+  --navy-800: #0F2044;
+  --navy-700: #162D5E;
+  --navy-600: #1E3A7A;
+  --navy-500: #2647A0;
+  --navy-400: #3258C4;
+  --navy-300: #5577D4;
+  --navy-200: #849AE3;
+  --navy-100: #B8C5F0;
+  --navy-50:  #DDE4F8;
+  --navy-25:  #F0F3FD;
 
-  --hms-teal-900: #0D3B38;
-  --hms-teal-800: #125550;
-  --hms-teal-700: #16706A;
-  --hms-teal-600: #1A8C84;
-  --hms-teal-500: #1FA89E;
-  --hms-teal-400: #35C4BA;
-  --hms-teal-300: #62D6CE;
-  --hms-teal-200: #9EE8E4;
-  --hms-teal-100: #D0F5F3;
-  --hms-teal-50:  #F0FDFB;
+  --teal-700: #16706A;
+  --teal-600: #1A8C84;
+  --teal-500: #1FA89E;
+  --teal-400: #35C4BA;
+  --teal-300: #62D6CE;
+  --teal-200: #9EE8E4;
+  --teal-100: #D0F5F3;
+  --teal-50:  #F0FDFB;
 
-  --hms-amber-900: #5C2D00;
-  --hms-amber-800: #7A3D00;
-  --hms-amber-700: #9A5000;
-  --hms-amber-600: #C46800;
-  --hms-amber-500: #F0820A;
-  --hms-amber-400: #F9A13A;
-  --hms-amber-300: #FBBC6E;
-  --hms-amber-200: #FDD9A8;
-  --hms-amber-100: #FEF0D8;
-  --hms-amber-50:  #FFFBF3;
+  --amber-600: #C46800;
+  --amber-500: #F0820A;
+  --amber-400: #F9A13A;
+  --amber-100: #FEF0D8;
+  --amber-50:  #FFFBF3;
 
-  --hms-red-600: #DC2626;
-  --hms-red-500: #EF4444;
-  --hms-red-100: #FEE2E2;
-  --hms-red-50:  #FFF5F5;
+  --red-500: #EF4444;
+  --red-100: #FEE2E2;
+  --red-50:  #FFF5F5;
 
-  --hms-green-600: #16A34A;
-  --hms-green-500: #22C55E;
-  --hms-green-100: #DCFCE7;
-  --hms-green-50:  #F0FDF4;
+  --green-600: #16A34A;
+  --green-100: #DCFCE7;
+  --green-50:  #F0FDF4;
 
-  /* ── Semantic Tokens ── */
-  --color-primary:        var(--hms-navy-700);
-  --color-primary-hover:  var(--hms-navy-800);
-  --color-primary-light:  var(--hms-navy-50);
-  --color-primary-text:   #FFFFFF;
+  --gray-50:  #F7F8FC;
+  --gray-100: #EAECF2;
+  --gray-200: #D4D8E4;
+  --gray-300: #B0B8CC;
+  --gray-400: #8896A8;
+  --gray-500: #5E6E82;
+  --gray-600: #3D4F63;
+  --gray-700: #253040;
+  --gray-800: #151E2B;
+  --gray-900: #0A1018;
 
-  --color-secondary:      var(--hms-teal-500);
-  --color-secondary-hover:var(--hms-teal-600);
-  --color-secondary-light:var(--hms-teal-50);
-
-  --color-accent:         var(--hms-amber-500);
-  --color-accent-hover:   var(--hms-amber-600);
-  --color-accent-light:   var(--hms-amber-50);
-
-  --color-success:        var(--hms-green-600);
-  --color-success-bg:     var(--hms-green-50);
-  --color-error:          var(--hms-red-600);
-  --color-error-bg:       var(--hms-red-50);
-  --color-warning:        var(--hms-amber-600);
-  --color-warning-bg:     var(--hms-amber-50);
-
-  /* ── Neutrals ── */
-  --color-bg:             #F7F8FC;
-  --color-surface:        #FFFFFF;
-  --color-surface-raised: #FFFFFF;
-  --color-border:         #E4E8F0;
-  --color-border-strong:  #C8D0E0;
-
-  --color-text-primary:   #0F1923;
-  --color-text-secondary: #4A5568;
-  --color-text-muted:     #8896A8;
-  --color-text-disabled:  #B8C4D0;
-
-  /* ── Role Colors ── */
-  --role-admin:        var(--hms-navy-700);
-  --role-admin-bg:     var(--hms-navy-50);
-  --role-doctor:       var(--hms-teal-600);
-  --role-doctor-bg:    var(--hms-teal-50);
-  --role-receptionist: var(--hms-amber-600);
-  --role-receptionist-bg: var(--hms-amber-50);
-  --role-patient:      #7C3AED;
-  --role-patient-bg:   #F5F3FF;
-  --role-lab:          #0891B2;
-  --role-lab-bg:       #ECFEFF;
-
-  /* ── Spacing & Shape ── */
-  --radius-sm:   6px;
-  --radius-md:   10px;
-  --radius-lg:   14px;
-  --radius-xl:   20px;
-  --radius-full: 9999px;
-
-  /* ── Shadows ── */
-  --shadow-sm:  0 1px 3px 0 rgb(15 25 35 / 0.06), 0 1px 2px -1px rgb(15 25 35 / 0.04);
-  --shadow-md:  0 4px 12px -2px rgb(15 25 35 / 0.08), 0 2px 6px -2px rgb(15 25 35 / 0.05);
-  --shadow-lg:  0 10px 28px -4px rgb(15 25 35 / 0.10), 0 4px 12px -4px rgb(15 25 35 / 0.06);
-  --shadow-xl:  0 20px 48px -8px rgb(15 25 35 / 0.12), 0 8px 20px -6px rgb(15 25 35 / 0.07);
-  --shadow-glow-primary: 0 0 0 3px rgb(30 58 122 / 0.15);
-  --shadow-glow-teal:    0 0 0 3px rgb(31 168 158 / 0.18);
-
-  /* ── Typography ── */
-  --font-sans: 'DM Sans', system-ui, sans-serif;
+  --font-sans: 'DM Sans', system-ui, -apple-system, sans-serif;
   --font-mono: 'DM Mono', 'Fira Code', monospace;
 
-  /* ── Transitions ── */
-  --transition-fast:   150ms cubic-bezier(0.4, 0, 0.2, 1);
-  --transition-base:   250ms cubic-bezier(0.4, 0, 0.2, 1);
-  --transition-slow:   400ms cubic-bezier(0.4, 0, 0.2, 1);
-  --transition-spring: 350ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  --radius-xs: 4px;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 20px;
+  --radius-pill: 9999px;
+
+  --shadow-xs: 0 1px 2px rgb(6 13 26 / 0.04);
+  --shadow-sm: 0 1px 4px rgb(6 13 26 / 0.06), 0 1px 2px rgb(6 13 26 / 0.04);
+  --shadow-md: 0 4px 14px rgb(6 13 26 / 0.08), 0 1px 4px rgb(6 13 26 / 0.05);
+  --shadow-lg: 0 12px 32px rgb(6 13 26 / 0.10), 0 4px 12px rgb(6 13 26 / 0.06);
+  --shadow-xl: 0 24px 56px rgb(6 13 26 / 0.14), 0 8px 24px rgb(6 13 26 / 0.08);
+  --shadow-glow-teal: 0 0 0 3px rgb(31 168 158 / 0.20);
+  --shadow-inset: inset 0 1px 2px rgb(6 13 26 / 0.06);
 }
 
-/* ── Dark mode tokens ── */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --color-bg:             #0A1220;
-    --color-surface:        #0F1A2E;
-    --color-surface-raised: #162440;
-    --color-border:         #1E2D47;
-    --color-border-strong:  #2A3F5F;
-    --color-text-primary:   #EDF2F8;
-    --color-text-secondary: #9BAEC0;
-    --color-text-muted:     #5E7590;
-  }
-}
-
-/* ── Base Reset ── */
 *, *::before, *::after { box-sizing: border-box; }
 
-html {
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-rendering: optimizeLegibility;
-}
+html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
 
 body {
   font-family: var(--font-sans);
-  background-color: var(--color-bg);
-  color: var(--color-text-primary);
+  background: var(--gray-50);
+  color: var(--gray-800);
   line-height: 1.6;
 }
 
-/* ── Focus Styles ── */
+::selection { background: var(--teal-200); color: var(--navy-900); }
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--gray-200); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--gray-300); }
+
 :focus-visible {
-  outline: 2px solid var(--color-secondary);
+  outline: 2px solid var(--teal-500);
   outline-offset: 2px;
   border-radius: var(--radius-sm);
 }
 
-/* ── Scrollbar ── */
-::-webkit-scrollbar { width: 6px; height: 6px; }
-::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: var(--color-border-strong); border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: var(--color-text-muted); }
-
-/* ── Selection ── */
-::selection { background: var(--hms-navy-200); color: var(--hms-navy-900); }
-
-/* ── Utility animations ── */
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(6px); }
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(10px); }
   to   { opacity: 1; transform: translateY(0); }
 }
-@keyframes slideInRight {
-  from { opacity: 0; transform: translateX(16px); }
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes slideRight {
+  from { opacity: 0; transform: translateX(-12px); }
   to   { opacity: 1; transform: translateX(0); }
 }
-@keyframes pulse-dot {
-  0%, 100% { transform: scale(1); opacity: 1; }
-  50%       { transform: scale(1.4); opacity: 0.7; }
+@keyframes pulse-soft {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.5; }
 }
 @keyframes shimmer {
-  from { background-position: -200% 0; }
-  to   { background-position: 200% 0; }
+  from { background-position: -600px 0; }
+  to   { background-position: 600px 0; }
+}
+@keyframes drawLine {
+  from { stroke-dashoffset: 1000; }
+  to   { stroke-dashoffset: 0; }
+}
+@keyframes floatUp {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-6px); }
 }
 @keyframes spin { to { transform: rotate(360deg); } }
+@keyframes scalePop {
+  0%   { transform: scale(0.92); opacity: 0; }
+  60%  { transform: scale(1.02); }
+  100% { transform: scale(1);    opacity: 1; }
+}
 
-.animate-fade-in   { animation: fadeIn 0.3s var(--transition-base) both; }
-.animate-slide-in  { animation: slideInRight 0.3s var(--transition-base) both; }
-.animate-pulse-dot { animation: pulse-dot 2s ease-in-out infinite; }
+.animate-fade-up    { animation: fadeUp 0.4s cubic-bezier(0.22,1,0.36,1) both; }
+.animate-fade-in    { animation: fadeIn 0.3s ease both; }
+.animate-slide-right{ animation: slideRight 0.35s cubic-bezier(0.22,1,0.36,1) both; }
+.animate-pop        { animation: scalePop 0.35s cubic-bezier(0.34,1.56,0.64,1) both; }
+.animate-float      { animation: floatUp 4s ease-in-out infinite; }
+.animate-pulse-soft { animation: pulse-soft 2s ease-in-out infinite; }
 
-/* ── Skeleton loader ── */
+.delay-100 { animation-delay: 0.10s; }
+.delay-150 { animation-delay: 0.15s; }
+.delay-200 { animation-delay: 0.20s; }
+.delay-300 { animation-delay: 0.30s; }
+.delay-400 { animation-delay: 0.40s; }
+.delay-500 { animation-delay: 0.50s; }
+
 .skeleton {
-  background: linear-gradient(90deg, var(--color-border) 25%, var(--color-surface) 50%, var(--color-border) 75%);
-  background-size: 200% 100%;
-  animation: shimmer 1.5s infinite;
+  background: linear-gradient(90deg, var(--gray-100) 25%, #fff 50%, var(--gray-100) 75%);
+  background-size: 600px 100%;
+  animation: shimmer 1.6s infinite;
   border-radius: var(--radius-md);
+}
+
+.glass {
+  background: rgba(255,255,255,0.06);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,0.10);
 }
